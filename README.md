@@ -1,8 +1,8 @@
-# home
+# 家庭中心手机控制端
 
-> A Vue.js project
+> 这个是我准备做的家庭中心整套程序的手机控制端
 
-## Build Setup
+## 跑起来
 
 ``` bash
 # install dependencies
