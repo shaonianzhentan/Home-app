@@ -2,6 +2,8 @@
 
 > 这个是我准备做的家庭中心整套程序的手机控制端
 
+> 测试地址：https://shaonianzhentan.github.com/
+
 ## 跑起来
 
 ``` bash
