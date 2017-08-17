@@ -33,37 +33,79 @@
 
     </mu-drawer>
 
-      <mu-list>
-        <mu-sub-header inset>系统信息</mu-sub-header>
-                <mu-list-item title="声音">
-          <mu-avatar icon="android" slot="leftAvatar" backgroundColor="#a4c639" />
-            <mu-badge :content="SystemInfo.volume" primary slot="right" />
-          </mu-list-item>
-               <mu-list-item title="接口">
-          <mu-avatar icon="android" slot="leftAvatar" backgroundColor="#a4c639" />
-          <span slot="describe">
-              <mu-text-field hintText="API地址" fullWidth v-model="api" /><br/>
-          </span>
-          <mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
-          <mu-menu-item title="更新系统状态" @click="init" />
-          <mu-menu-item title="获取远程API" @click="getapi" />
-          <mu-menu-item title="设置本地API" @click="setapi" />
-          </mu-icon-menu>
-        </mu-list-item>
-        <mu-list-item title="IP地址" v-bind:describeText="this.SystemInfo.ip">
-          <mu-avatar icon="android" slot="leftAvatar" backgroundColor="#a4c639" />
-        </mu-list-item>
-        <mu-list-item title="开机时间" v-bind:describeText="this.SystemInfo.BootTime">
-          <mu-avatar icon="android" slot="leftAvatar" backgroundColor="#a4c639" />
-        </mu-list-item>
-        <mu-list-item title="运行时间" v-bind:describeText="this.SystemInfo.ProgramTime">
-          <mu-avatar icon="android" slot="leftAvatar" backgroundColor="#a4c639" />
-        </mu-list-item>
-        <mu-list-item title="系统时间" v-bind:describeText="this.SystemInfo.ServerTime">
-          <mu-avatar icon="android" slot="leftAvatar" backgroundColor="#a4c639" />
-        </mu-list-item>
-      </mu-list>
-      <mu-divider/>
+
+  <mu-list>
+    <mu-sub-header inset>系统信息</mu-sub-header>
+    <mu-list-item title="声音">
+      <mu-avatar icon="settings_system_daydream" slot="leftAvatar" backgroundColor="#a4c639" />
+      <mu-badge :content="SystemInfo.volume" primary slot="right" />
+    </mu-list-item>
+    <mu-list-item title="接口">
+      <mu-avatar icon="settings_system_daydream" slot="leftAvatar" backgroundColor="#a4c639" />
+      <span slot="describe">
+        <mu-text-field hintText="API地址" fullWidth v-model="api" />
+        <br/>
+      </span>
+      <mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
+        <mu-menu-item title="更新系统状态" @click="init" />
+        <mu-menu-item title="获取远程API" @click="getapi" />
+        <mu-menu-item title="设置本地API" @click="setapi" />
+      </mu-icon-menu>
+    </mu-list-item>
+    <mu-list-item title="IP地址" v-bind:describeText="this.SystemInfo.ip">
+      <mu-avatar icon="settings_system_daydream" slot="leftAvatar" backgroundColor="#a4c639" />
+    </mu-list-item>
+    <mu-list-item title="开机时间" v-bind:describeText="this.SystemInfo.BootTime">
+      <mu-avatar icon="settings_system_daydream" slot="leftAvatar" backgroundColor="#a4c639" />
+    </mu-list-item>
+    <mu-list-item title="运行时间" v-bind:describeText="this.SystemInfo.ProgramTime">
+      <mu-avatar icon="settings_system_daydream" slot="leftAvatar" backgroundColor="#a4c639" />
+    </mu-list-item>
+    <mu-list-item title="系统时间" v-bind:describeText="this.SystemInfo.ServerTime">
+      <mu-avatar icon="settings_system_daydream" slot="leftAvatar" backgroundColor="#a4c639" />
+    </mu-list-item>
+  
+  </mu-list>
+
+
+  <mu-divider/>
+  <mu-list>
+    <mu-sub-header inset>设备信息</mu-sub-header>
+    <mu-list-item title="CPU温度">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.CPU_Temperature" slot="right" />
+    </mu-list-item>
+    <mu-list-item title="CPU使用率">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.CPU_Use" slot="right" />
+    </mu-list-item>
+    <mu-list-item title="内存总量">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.RAM_Total" slot="right" />
+    </mu-list-item>
+    <mu-list-item title="内存使用量">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.RAM_Used" slot="right" />
+    </mu-list-item>
+    <mu-list-item title="内存空闲量">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.RAM_Free" slot="right" />
+    </mu-list-item>
+    <mu-list-item title="磁盘总量">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.DISK_Total_Space" slot="right" />
+    </mu-list-item>
+    <mu-list-item title="磁盘使用量">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.DISK_Used_Space" slot="right" />
+    </mu-list-item>
+    <mu-list-item title="磁盘空闲量">
+      <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
+      <mu-badge v-bind:content="SystemInfo.DISK_Used_Percentage" slot="right" />
+    </mu-list-item>
+  </mu-list>
+  <mu-divider/>
+
       <mu-list>
         <mu-sub-header inset>程序信息</mu-sub-header>
 
@@ -101,7 +143,7 @@
     <mu-bottom-nav :value="bottomNav" class="footerFixed" shift @change="handleChange">
       <mu-bottom-nav-item value="list" title="状态" icon="grid_on" />
       <mu-bottom-nav-item value="music" title="音乐" icon="queue_music" to="Music" />
-      <mu-bottom-nav-item value="computer" title="遥控器" icon="computer" to="RemoteControl" />
+      <mu-bottom-nav-item value="computer" title="遥控器" icon="control_point" to="RemoteControl" />
       <mu-bottom-nav-item value="pictures" title="图片" icon="photo" to="Picture" />
       <mu-bottom-nav-item value="access_time" title="时钟" icon="access_time" to="Clock" />
     </mu-bottom-nav>
