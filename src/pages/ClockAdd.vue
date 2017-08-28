@@ -40,8 +40,7 @@ export default {
       item: {
         id: '',
         time: '',
-        voice: '',
-        count: 0
+        voice: ''
       },
       dataSource: []
     }

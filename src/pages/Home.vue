@@ -35,7 +35,15 @@
 
 
   <mu-list>
+            <mu-list-item title="语音命令">
+      <mu-avatar icon="keyboard_voice" slot="leftAvatar" backgroundColor="black" />
+      <span slot="describe">
+        <mu-text-field hintText="控制命令" fullWidth v-model="mojing" @keyup.enter.native="sendvoice" />
+      </span>
+    </mu-list-item>
+     <mu-divider />
     <mu-sub-header inset>系统信息</mu-sub-header>
+    <mu-divider />
     <mu-list-item title="声音">
       <mu-avatar icon="settings_system_daydream" slot="leftAvatar" backgroundColor="#a4c639" />
       <mu-badge :content="SystemInfo.volume" primary slot="right" />
@@ -71,6 +79,7 @@
   <mu-divider/>
   <mu-list>
     <mu-sub-header inset>设备信息</mu-sub-header>
+    <mu-divider />
     <mu-list-item title="CPU温度">
       <mu-avatar icon="desktop_windows" slot="leftAvatar" backgroundColor="#7e57c2" />
       <mu-badge v-bind:content="SystemInfo.CPU_Temperature" slot="right" />
@@ -108,7 +117,7 @@
 
       <mu-list>
         <mu-sub-header inset>程序信息</mu-sub-header>
-
+<mu-divider />
           <mu-list-item title="相册超时">
               <mu-avatar icon="settings_applications" slot="leftAvatar" backgroundColor="blue" />
             <mu-badge content="0秒" slot="right" />
@@ -162,6 +171,7 @@ export default {
       open: false,
       docked: true,
       api: '',
+      mojing: '',
       infraredSwitch: false
     }
   },
@@ -234,6 +244,14 @@ export default {
         })
       }).catch(() => {
 
+      })
+    },
+    sendvoice () {
+      var msg = this.mojing
+      if (msg === '') return
+      this.mojing = ''
+      this.$http.post(this.HomeService.api + 'program', { 'key': 'sendvoice', 'value': msg }).then(res => {
+        this.$toast(res.body, 3000)
       })
     }
   }
