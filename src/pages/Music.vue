@@ -8,10 +8,10 @@
       </mu-icon-menu>
     </mu-appbar>
     <br /><br /><br />
-      <mu-list v-for="k in list">
-        <mu-sub-header>{{k.k}}</mu-sub-header>
-        <template v-for="item in k.v">
-          <mu-list-item :title="item.title">
+    <mu-list v-for="k in list" v-bind:key="k.k">
+      <mu-sub-header>{{k.k}}</mu-sub-header>
+      <template v-for="item in k.v">
+        <mu-list-item :title="item.title" v-bind:key="item.id">
           <mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
             <mu-menu-item title="播放" @click="load(item.link)" />
             <mu-menu-item title="编辑" @click="edit(item)" />
@@ -19,11 +19,10 @@
             <mu-menu-item title="删除" @click="del(item)" />
           </mu-icon-menu>
           <mu-avatar color="purple500" :style="{'margin-left': '-8px'}" backgroundColor="transparent" slot="leftAvatar">
-          {{item.title[0]}}</mu-avatar>
-          </mu-list-item>
-           <mu-divider inset/>
-</template>
-
+            {{item.title[0]}}</mu-avatar>
+        </mu-list-item>
+        <mu-divider inset v-bind:key="item.id" />
+      </template>
       </mu-list>
   </div>
 </template>
@@ -75,7 +74,7 @@ export default {
     },
     del (item) {
       if (confirm('确定删除？')) {
-        this.$http.post(this.HomeService.api + 'music', { 'key': 'del', 'value': item.id }).then(res => {
+        this.$http.post(this.HomeService.api + 'music', { 'key': 'del', 'value': {id: item.id} }).then(res => {
           console.log(res.body)
           this.$toast('删除成功', 3000)
           this.init()
