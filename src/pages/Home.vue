@@ -15,7 +15,10 @@
       <mu-list>
         <mu-sub-header>开关设置</mu-sub-header>
         <mu-list-item disableRipple title="红外遥控开关" @click="toggleInfrared">
-          <mu-switch v-model="infraredSwitch" disabled slot="right" :label="infraredSwitch?'开':'关'" labelLeft    />
+          <mu-switch v-model="SystemInfo.infraredSwitch" disabled slot="right" :label="SystemInfo.infraredSwitch?'开':'关'" labelLeft    />
+        </mu-list-item>
+        <mu-list-item disableRipple title="LED灯开关" @click="toggleLed">
+          <mu-switch v-model="SystemInfo.ledSwitch" disabled slot="right" :label="SystemInfo.ledSwitch?'开':'关'" labelLeft    />
         </mu-list-item>
       </mu-list>
  <mu-divider />
@@ -171,8 +174,7 @@ export default {
       open: false,
       docked: true,
       api: '',
-      mojing: '',
-      infraredSwitch: false
+      mojing: ''
     }
   },
   watch: {
@@ -203,8 +205,7 @@ export default {
         var m = Math.floor((EndTimeMsg - h * 60 * 60) / 60)
         var s = Math.floor(EndTimeMsg - h * 60 * 60 - m * 60)
         this.SystemInfo.ProgramTime = parseInt(h / 24) + '天' + h + '时' + m + '分' + s + '秒'
-
-        this.infraredSwitch = this.SystemInfo['infraredSwitch'] === '开'
+        
         localStorage['LOCAL-IP'] = this.SystemInfo['ip']
         this.$toast('获取状态信息成功', 3000)
         console.log(res.body)
@@ -223,8 +224,14 @@ export default {
     },
     toggleInfrared () {
       this.toggle(false)
-      this.$http.post(this.HomeService.api + 'os', { 'key': 'infrared', 'value': this.infraredSwitch ? '关' : '开' }).then(res => {
-        this.infraredSwitch = !this.infraredSwitch
+      this.$http.post(this.HomeService.api + 'os', { 'key': 'infrared', 'value': this.SystemInfo.infraredSwitch ? 0 : 1 }).then(res => {
+        this.SystemInfo.infraredSwitch = !this.SystemInfo.infraredSwitch
+        this.$toast(res.body, 3000)
+      })
+    },
+    toggleLed (){
+      this.$http.post(this.HomeService.api + 'os', { 'key': 'led', 'value': this.SystemInfo.ledSwitch ? 0 : 1 }).then(res => {
+        this.SystemInfo.ledSwitch = !this.SystemInfo.ledSwitch
         this.$toast(res.body, 3000)
       })
     },
