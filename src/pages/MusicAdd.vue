@@ -25,11 +25,8 @@
     <mu-divider />
    <mu-list-item title="类型">
       <mu-avatar icon="music_note" slot="leftAvatar" backgroundColor="purple500" />
-      <mu-select-field v-model="item.type" fullWidth>
-        <mu-menu-item value="喜马拉雅" title="喜马拉雅"/>
+      <mu-select-field v-model="item.type" fullWidth>        
         <mu-menu-item value="网易云音乐" title="网易云音乐" />
-        <mu-menu-item value="收音机" title="收音机"/>
-        <mu-menu-item value="百度音乐" title="百度音乐"/>
       </mu-select-field>
    </mu-list-item>
   </mu-list>
