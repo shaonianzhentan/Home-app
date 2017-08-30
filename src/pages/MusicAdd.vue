@@ -15,10 +15,10 @@
       </span>
     </mu-list-item>
     <mu-divider />
-   <mu-list-item title="链接">
+   <mu-list-item title="歌单ID">
       <mu-avatar icon="music_note" slot="leftAvatar" backgroundColor="purple500" />
       <span slot="describe">
-          <mu-text-field hintText="输入播放链接" fullWidth v-model="item.link" /><br/>
+          <mu-text-field hintText="输入歌单ID" fullWidth v-model="item.link" /><br/>
       </span>
     </mu-list-item>
 

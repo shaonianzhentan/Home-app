@@ -63,18 +63,13 @@ export default {
         console.log(this.list)
         this.$emit('loading', false)
       })
-      localStorage.removeItem('FM-DATA')
     },
     load (link) {
       this.$emit('loading', true)
       var _self = this
       this.$http.post(this.HomeService.api + 'music', { 'key': 'load', 'value': link }).then(res => {
-        // alert(res.body)
-        setTimeout(() => {
-          this.$toast('开始播放', 3000)
-          _self.$emit('loading', false)
-        }, 5000)
-        this.$toast('载入链接成功，5秒后播放', 4000)
+        this.$toast('开始播放当前歌单', 3000)
+        _self.$emit('loading', false)
         console.log(res.body)
       })
     },
