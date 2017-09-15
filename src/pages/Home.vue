@@ -205,7 +205,6 @@ export default {
         var m = Math.floor((EndTimeMsg - h * 60 * 60) / 60)
         var s = Math.floor(EndTimeMsg - h * 60 * 60 - m * 60)
         this.SystemInfo.ProgramTime = parseInt(h / 24) + '天' + h + '时' + m + '分' + s + '秒'
-        
         localStorage['LOCAL-IP'] = this.SystemInfo['ip']
         this.$toast('获取状态信息成功', 3000)
         console.log(res.body)
@@ -229,7 +228,7 @@ export default {
         this.$toast(res.body, 3000)
       })
     },
-    toggleLed (){
+    toggleLed () {
       this.$http.post(this.HomeService.api + 'os', { 'key': 'led', 'value': this.SystemInfo.ledSwitch ? 0 : 1 }).then(res => {
         this.SystemInfo.ledSwitch = !this.SystemInfo.ledSwitch
         this.$toast(res.body, 3000)
